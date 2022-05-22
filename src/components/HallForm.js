@@ -92,12 +92,12 @@ export class HallForm extends Component {
             </label>
           </div>
           
-          {
+{{
             mResponse.map((data)=>{
               console.log("Page 1")
               console.log(data)
             })
-          }
+          }}
           <div className="form-group">
             <label>
             Movie:
