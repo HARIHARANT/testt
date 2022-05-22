@@ -3,6 +3,7 @@ import App from './App';
 import '../stylesheets/Moviehall.css';
 import Seatbooking from './Seatbooking';
 
+var mResponse = [];
 export class HallForm extends Component {
 
   constructor(props) {
@@ -18,6 +19,8 @@ export class HallForm extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    const url = "https://app-096f81a5-27d4-4723-bfe5-9c5c82098d5e.cleverapps.io";
+    this.moviesFetch();
   }
 
   handleChange(event) {
@@ -34,6 +37,13 @@ export class HallForm extends Component {
   handleSubmit= (event) =>{
     event.preventDefault();
     this.setState({book: true});
+  }
+
+  moviesFetch = async ()=>{
+     let moviesFetchURL = `{url}/movies`;
+     let mFetchResp =  await axios.get(moviesFetchURL, {});
+     console.log(mFetchResp)
+     mResponse = mFetchResp;
   }
 
   render(){
@@ -81,11 +91,18 @@ export class HallForm extends Component {
             </select>
             </label>
           </div>
-
+          
+          {
+            mResponse.map((data)=>{
+              console.log("Page 1")
+              console.log(data)
+            })
+          }
           <div className="form-group">
             <label>
-            HallName:
+            Movie:
             </label>
+            <img src="#" >
             <input className="form-control" name="hall" type="text" value={this.state.hall} required onChange={this.handleChange} />
           </div>
 
@@ -106,3 +123,4 @@ export class HallForm extends Component {
     )
   }
 }
+
